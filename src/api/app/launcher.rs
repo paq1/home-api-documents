@@ -2,6 +2,7 @@ use rocket::{Build, Rocket, routes};
 use crate::api::app::cors::CORS;
 
 use crate::api::documents::routes::hello_world::hello;
+use crate::api::documents::routes::read_documents_router::get_documents;
 
 pub async fn launcher () -> Result<Rocket<Build>, String> {
     let build = rocket::build()
@@ -9,7 +10,7 @@ pub async fn launcher () -> Result<Rocket<Build>, String> {
         .attach(CORS)
         .mount(
             "/",
-            routes![hello]
+            routes![hello, get_documents]
         );
 
     Ok(build)
